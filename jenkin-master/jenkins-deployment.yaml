@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins
+  labels:
+    name: jenkins
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: jenkins
+secrets:
+- name: default-token-4pxf2
+
+---
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFNU1ERXhPREV4TURJME5sb1hEVEk1TURFeE5URXhNREkwTmxvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBUEkvCiszM1hRWGJ0Slo5bHJpSmVTTzYyYjZDNTluOGRPRXRPVzJDY0cxTU9GbXV6VzR3dy9tUTJBYmdtY3lPVmU5TEUKTVFYa2pFTmRaRmtwdVd4RXVCVkROQlV0Z21WUmJtaTUza3RNRmEzNFZoYkR6MWMrNnpTUUJLcDlCcjd2SzJNZAorQVBCWHo0TVJza1o1Y1NVZm9qRlpZRGFiWWVQaXc2TmViS3ZnYUlCR3J5UlIzVVBBLzY0SVkzMXYrYzlTdGZjClV6THZKZDNFVFJ5WTJTQU1PQXNUbDVGeGhDaFdxUG80NTY2NkZlR2FTVTg4NzhqdmE1L0c1cEgzQ1M1NWR2djMKZXg1V01nM0E3TC9Md0VJUlc3WHpCNDM2d21hcVZrdHVyRFJ3aFBXRThNUnVRT1FpWC8wTzNtdDVBZ1ZVUkdQeQpsUmpYY0JoNWcxT1pNSDJTUUtVQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFNa3RMeFJzck1UcEJyT29jRFV1cE1JNE5uZzUKVitBMktGY3Z5NUZ0djBLRG9mYlBqazZwT3NTS0pCblROdHNodlFiRlpoUmhtcVJYd2VTSGsxeThIZ3pBZGsxUApic2owM05FbjBPNkRoNlhvbkdxWHpaZHoxR3RiZlBYVHNMMXdnQlhnYUttUVprWVA3enFmM2hKMlczQTJud0R6CnlWNkdQUkNDellhditlMnEwUVB2K2NwNW9IV3NaTGdlbVJkQXNEQUZnMk13ZUlMMERacXllRGQ2bXd3VXYvZWcKTjdXL0ljRFd0L3hXVzlERzlQKytPNlAxUEZNQk5yMXR1cmI3NmNzR2Q5dGdCSks5YU1UTno0SjM0WXBvK08xcQplQnJ2Tm9PVlBubHpWMDE4UW5jWERYaWdmSUxsTGlkeHNXNEFIRW10cGd0djNqYlZpR3BLSVFkSVZ0az0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  token: ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNklpSjkuZXlKcGMzTWlPaUpyZFdKbGNtNWxkR1Z6TDNObGNuWnBZMlZoWTJOdmRXNTBJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5dVlXMWxjM0JoWTJVaU9pSnJkV0psTFhONWMzUmxiU0lzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVmpjbVYwTG01aGJXVWlPaUprWldaaGRXeDBMWFJ2YTJWdUxUUndlR1l5SWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXpaWEoyYVdObExXRmpZMjkxYm5RdWJtRnRaU0k2SW1SbFptRjFiSFFpTENKcmRXSmxjbTVsZEdWekxtbHZMM05sY25acFkyVmhZMk52ZFc1MEwzTmxjblpwWTJVdFlXTmpiM1Z1ZEM1MWFXUWlPaUpoWkRreE5HVXlNeTB4WWpFd0xURXhaVGt0WW1RMU9DMHdPREF3TWpkaU5XWTVORFVpTENKemRXSWlPaUp6ZVhOMFpXMDZjMlZ5ZG1salpXRmpZMjkxYm5RNmEzVmlaUzF6ZVhOMFpXMDZaR1ZtWVhWc2RDSjkudG9NeThqcmMwcGZOQTJuSDd2YU55TnZvWHo5QnlwSXUyd1U4YU5rX0F6NUlpN3dLWHNfT0JEZTdTbE85Wm9fQXlsbDRLRk92MEstcWxWUF9NZjR5M1kwZkNxYl9hYU9MY2p0WTUxWXlGTjVYb0FlUjQxdTNrU3NQRUNvQ3BrTllSSkg1ZmNobDRSb2FMTll1R0V3dDcxdHJuODdxUXZnekkyUDNNMUVvdThOQWFlRm1aLTlGaGRDYWJ2LS1kWlduRThyeDNTZmlMeXFSOTg5U1BoeHd2TWM1Z1lHV2NiZm41aGhzX28xSmRuUmUwcWZLLXNpaThBVnZpVlByNXdfN3lPZGNsWUpFRzZTdWM1bjNZUmVRcTI2bHptYUxzM09MM1VKT2hVMDJJU29UVnlZTXpMaUxPamZoUTh1RUZMOTVINkFuMldiUkFINWtrRFk4aVo1RGVB
+kind: Secret
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: default
+  name: default-token
+  namespace: jenkins
+type: kubernetes.io/service-account-token
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: jenkins
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: jenkins
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkin-server-service
+  namespace: jenkins
+spec:
+  selector:
+    app: jenkins-master
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: slaveport
+      protocol: TCP
+      port: 50001
+      targetPort: 50001
+  type: LoadBalancer
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins-master
+  namespace: jenkins
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins-master
+    spec:
+      containers:
+        - name: jenkins-master
+          image: hemkit777/jenkin-master:1.0
+          command:
+                - /etc/alternatives/java
+                - -Dcom.sun.akuma.Daemon=daemonized
+                - -Djava.awt.headless=true
+                - -DJENKINS_HOME=/var/jenkins_home
+                - -jar
+                - /usr/lib/jenkins/jenkins.war
+                - --webroot=/var/cache/jenkins/war
+                - --httpPort=8080
+                - --debug=5
+                - --handlerCountMax=100
+                - --handlerCountMaxIdle=20
+                - -Djenkins.install.runSetupWizard=false
+          ports:
+            - name: http-port
+              containerPort: 8080
+            - name: jnlp-port
+              containerPort: 50000
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-home
+          hostPath:
+            path: /var/lib/docker/jenkin
+
