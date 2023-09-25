@@ -1,29 +1,40 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: nginx-deployment
-  labels:
-    app: web
+  name: jenkins-master
+  namespace: jenkins
 spec:
-  selector:
-    matchLabels:
-      app: web
-  replicas: 5
-  strategy:
-    type: RollingUpdate
+  replicas: 1
   template:
     metadata:
       labels:
-        app: web
+        app: jenkins-master
     spec:
       containers:
-       —name: nginx
-          image: nginx
-          resources:
-            limits:
-              memory: 200Mi
-            requests:
-              cpu: 100m
-              memory: 200Mi
+        - name: jenkins-master
+          image: ngnix:1.10.3
+          command:
+                - /etc/alternatives/java
+                - -Dcom.sun.akuma.Daemon=daemonized
+                - -Djava.awt.headless=true
+                - -DJENKINS_HOME=/var/jenkins_home
+                - -jar
+                - /usr/lib/jenkins/jenkins.war
+                - --webroot=/var/cache/jenkins/war
+                - --httpPort=8080
+                - --debug=5
+                - --handlerCountMax=100
+                - --handlerCountMaxIdle=20
+                - -Djenkins.install.runSetupWizard=false
           ports:
-           —containerPort: 80
+            - name: http-port
+              containerPort: 8080
+            - name: jnlp-port
+              containerPort: 50000
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-home
+          hostPath:
+            path: /var/lib/docker/jenkin
