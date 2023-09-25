@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: jenkins-master
-          image: nginx:1.10.3
+          image: nginx:1.25.2
           command:
                 - /etc/alternatives/java
                 - -Dcom.sun.akuma.Daemon=daemonized
